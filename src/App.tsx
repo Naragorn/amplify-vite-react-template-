@@ -22,13 +22,12 @@ function App() {
   function createTodo() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
   }
-
   return (
     <Authenticator>
-      {({ signOut }) => (
+        {({ signOut, user }) => (
         <main>
-          <h1>My todos</h1>
-          <button onClick={createTodo}>+ new</button>
+          <h1>{user?.signInDetails?.loginId}'s todos</h1>
+          <button onClick={createTodo}>Create</button>
           <ul>
             {todos.map((todo) => (
               <li
@@ -44,7 +43,7 @@ function App() {
             <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
               Review next step of this tutorial.
             </a>
-          </div>
+          </div>          
           <button onClick={signOut}>Sign out</button>
         </main>
     )}
